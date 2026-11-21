@@ -47,8 +47,7 @@ a.link{color:#2F5BFF}
   <div class="serv"><span>Servings</span><div class="step"><button id="minus" aria-label="Fewer servings">&minus;</button><b id="sv">1</b><button class="plus" id="plus" aria-label="More servings">+</button></div></div>
   <section><h2>Ingredients</h2><div id="ings"></div></section>
   <section><h2>Steps</h2><ol id="steps"></ol></section>
-  <section><h2>Grocery list for the week</h2><div class="meta" id="store" style="color:#5C5648;margin:-4px 0 10px"></div><div id="groc"></div></section>
-  <section><h2>Shopping trip at Walmart</h2><div class="meta" style="color:#5C5648;margin:-4px 0 10px">Rough prices for the servings picked above. Fresh items scale with servings, pantry items stay the same. Check the shelf, they can be a little off.</div><div id="shop"></div></section>
+  <section><h2>Grocery list for the week</h2><div class="meta" id="store" style="color:#5C5648;margin:-4px 0 4px"></div><div class="meta" style="color:#5C5648;margin:0 0 10px">Everything is listed the way it is sold, so you buy whole packs and whole veggies. The recipe amounts above are what you use from them. Rough prices. Fresh items scale with servings, pantry items stay the same. Tap to check off.</div><div id="shop"></div></section>
   <div class="note">The amounts change with the servings number. Tap an ingredient to check it off.</div>
 </div>
 <script>
@@ -70,7 +69,7 @@ a.link{color:#2F5BFF}
       h+='<div class="cat">'+sec.section+'</div>';
       sec.items.forEach(function(i){
         var mult=pantry?1:n,price=i.p*mult;tot+=price;if(pantry)pan+=price;
-        h+='<div class="row" style="cursor:default"><span class="t" style="flex:1">'+(mult>1?mult+" x ":"")+i.n+'</span><b>$'+price.toFixed(2)+'</b></div>';
+        var id="s:"+i.n;h+='<button class="row '+(checked[id]?"done":"")+'" data-id="'+id+'"><span class="box">'+(checked[id]?"\u2713":"")+'</span><span class="t" style="flex:1">'+(mult>1?mult+" x ":"")+i.n+'</span><b>$'+price.toFixed(2)+'</b></button>';
       });
     });
     h+='<div class="row" style="cursor:default;background:#14213D;color:#fff;margin-top:10px"><span class="t" style="flex:1">About total, first trip</span><b>$'+Math.round(tot)+'</b></div>';
@@ -89,21 +88,6 @@ a.link{color:#2F5BFF}
       return '<button class="row '+(checked[id]?"done":"")+'" data-id="'+id+'"><span class="box">'+(checked[id]?"✓":"")+'</span><span class="t">'+line(i,n)+'</span></button>';
     }).join("");
     q("steps").innerHTML=d.steps.map(function(s,ix){return '<li><i>'+(ix+1)+'</i><span>'+s+'</span></li>';}).join("");
-    var cats={};
-    data.days.forEach(function(dd){dd.ingredients.forEach(function(i){
-      var key=i.n+"|"+i.u;cats[i.c]=cats[i.c]||{};
-      cats[i.c][key]=cats[i.c][key]||{n:i.n,u:i.u,a:0};cats[i.c][key].a+=i.a;
-    });});
-    var h="";
-    ["Produce","Meat","Dairy","Pantry"].forEach(function(c){
-      if(!cats[c])return;
-      h+='<div class="cat">'+c+'</div>';
-      Object.keys(cats[c]).sort().forEach(function(k){
-        var i=cats[c][k],id="g:"+k;
-        h+='<button class="row '+(checked[id]?"done":"")+'" data-id="'+id+'"><span class="box">'+(checked[id]?"✓":"")+'</span><span class="t">'+line(i,n)+'</span></button>';
-      });
-    });
-    q("groc").innerHTML=h;
     renderShop();
   }
   document.addEventListener("click",function(e){
