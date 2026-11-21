@@ -55,6 +55,21 @@ class Bridge(private val a: MainActivity) {
     fun setAte(id: String, value: Boolean) { Alarms.setAte(a, id, value) }
 
     @JavascriptInterface
+    fun getSteps() {
+        Thread {
+            val r = Steps.read(a)
+            a.runOnUiThread { a.web.evaluateJavascript("window.onSteps&&window.onSteps(" + r + ")", null) }
+        }.start()
+    }
+
+    @JavascriptInterface
+    fun askSteps() {
+        a.runOnUiThread {
+            try { a.startActivityForResult(Steps.permissionIntent(a), 9) } catch (e: Exception) { }
+        }
+    }
+
+    @JavascriptInterface
     fun checkUpdate() {
         Thread {
             val r = Updater.check(a)

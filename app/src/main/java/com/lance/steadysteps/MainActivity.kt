@@ -64,6 +64,12 @@ class MainActivity : Activity() {
         web.evaluateJavascript("window.nativeResume&&window.nativeResume()", null)
     }
 
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(code: Int, result: Int, data: Intent?) {
+        super.onActivityResult(code, result, data)
+        web.evaluateJavascript("window.nativeResume&&window.nativeResume()", null)
+    }
+
     fun batterySettings() {
         try {
             startActivity(Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:$packageName")))

@@ -142,7 +142,7 @@ svg text{fill:var(--muted);font-family:var(--font-body);font-size:11px}
     <details>
       <summary>Make it yours</summary>
       <div class="stack" style="margin-top:12px">
-        <div class="field"><label class="small" for="s-tiny">My tiny step (so small it feels silly)</label><input type="text" id="s-tiny" maxlength="80"></div>
+        <div class="field"><label class="small" for="s-goal">My daily step goal</label><input type="number" inputmode="numeric" id="s-goal" min="500" max="50000"></div>
         <div class="field"><label class="small" for="s-anchor">Something I already do every day</label><input type="text" id="s-anchor" maxlength="80"></div>
         <div class="field"><label class="small" for="s-habit">The healthy thing I do right after</label><input type="text" id="s-habit" maxlength="80"></div>
         <div class="label" style="margin-top:8px">My food plan</div>
@@ -156,13 +156,14 @@ svg text{fill:var(--muted);font-family:var(--font-body);font-size:11px}
 <script>
 (function(){
 var KEY="steadysteps.v1";
-var DEFAULTS={v:1,tiny:"Walk to the mailbox and back",anchor:"I pour my morning coffee",habit:"drink a full glass of water",days:{},updated:0,juiceCal:140,
+var DEFAULTS={v:1,tiny:"Hit my step goal",stepGoal:6000,anchor:"I pour my morning coffee",habit:"drink a full glass of water",days:{},updated:0,juiceCal:140,
   meals:[
     {id:"eat1",when:"6:00 to 7:30",name:"Egg white scramble and a cup of fruit",cal:150},
     {id:"eat2",when:"12:00 to 2:30",name:"Healthy Turkey and a cup of Market Vegetable soup",cal:560},
     {id:"grab",when:"Anytime",name:"Apple or pear",cal:95}
   ]};
 var state=load();
+var stepInfo={state:"none",steps:0};
 var cloudRef=null,cloudTimer=null;
 
 function load(){
@@ -248,13 +249,24 @@ function render(){
     '<span class="small">'+(lv.next?(lv.next[0]-st.total)+' more day'+((lv.next[0]-st.total)===1?'':'s')+' to '+esc(lv.next[1]):'Top level. Nice.')+'</span>';
 
   var tiny=document.getElementById("tiny-card");
+  var goal=(state.stepGoal||6000),goalToday=r.rough?Math.round(goal/2):goal;
+  var stepHtml;
+  if(stepInfo.state==="ok"){
+    var pct=Math.min(100,Math.round(stepInfo.steps*100/goalToday));
+    stepHtml='<div class="big">'+stepInfo.steps.toLocaleString()+' / '+goalToday.toLocaleString()+' steps</div>'+
+      '<div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+pct+'" aria-label="Steps today"><i style="width:'+pct+'%"></i></div>'+
+      (r.tiny?'<div class="msg">'+CHECK+' Step goal done. '+esc(lastCheer||CHEERS[new Date().getDate()%CHEERS.length])+'</div>':'<div class="small">'+Math.max(0,goalToday-stepInfo.steps).toLocaleString()+' to go. Counted from your watch through Samsung Health.</div>');
+  }else if(stepInfo.state==="perm"){
+    stepHtml='<div class="big">'+goalToday.toLocaleString()+' steps today</div><div class="small">Connect your watch steps so this counts by itself.</div><button class="btn" data-act="stepperm">Connect watch steps</button>';
+  }else{
+    stepHtml='<div class="big">'+goalToday.toLocaleString()+' steps today</div>'+
+      '<div class="small">'+(stepInfo.state==="unavailable"?'Health Connect is not ready on this phone, so steps cannot be counted here yet.':'Steps count automatically inside the phone app.')+'</div>'+
+      '<button class="btn '+(r.tiny?'done pop':'')+'" data-act="tiny" aria-pressed="'+(!!r.tiny)+'">'+(r.tiny?CHECK+' Done':'I hit my goal')+'</button>';
+  }
   tiny.innerHTML=
-    '<div class="label">Today\'s tiny step</div>'+
-    '<div class="big">'+esc(state.tiny)+'</div>'+
-    '<button class="btn '+(r.tiny?'done pop':'')+'" data-act="tiny" aria-pressed="'+(!!r.tiny)+'">'+(r.tiny?CHECK+' Done':'I did it')+'</button>'+
-    (r.tiny?'<div class="msg">'+esc(lastCheer||CHEERS[new Date().getDate()%CHEERS.length])+'</div>':'')+
+    '<div class="label">Today\'s step goal</div>'+stepHtml+
     (st.returning?'<div class="note">Welcome back. Your '+st.total+' days still count. Today starts a new chain.</div>':'')+
-    '<button class="switch" data-act="rough" aria-pressed="'+(!!r.rough)+'"><span><b>Rough day?</b><br><span class="small">'+(r.rough?'That is fine. One tiny step is enough and your streak stays alive.':'Turn this on and the tiny step is all you need.')+'</span></span><span class="knob"></span></button>';
+    '<button class="switch" data-act="rough" aria-pressed="'+(!!r.rough)+'"><span><b>Rough day?</b><br><span class="small">'+(r.rough?'That is fine. Today the goal is half and your streak stays alive.':'Turn this on and the goal drops to half.')+'</span></span><span class="knob"></span></button>';
 
   var habit=document.getElementById("habit-card");
   if(r.rough){habit.style.display="none";}
@@ -367,6 +379,7 @@ document.addEventListener("click",function(e){
   var b=e.target.closest("[data-act]");if(!b)return;
   var act=b.getAttribute("data-act"),k=ymd(new Date());
   if(act==="tiny"){var r=rec(k);r.tiny=!r.tiny;if(r.tiny)lastCheer=CHEERS[Math.floor(Math.random()*CHEERS.length)];save();render();}
+  else if(act==="stepperm"){if(window.Native){try{Native.askSteps();}catch(e){}}}
   else if(act==="habit"){var r2=rec(k);r2.habit=!r2.habit;save();render();}
   else if(act==="rough"){var r3=rec(k);r3.rough=!r3.rough;save();render();}
   else if(act==="meal"){var mid=b.getAttribute("data-id"),rm=rec(k);rm.m=rm.m||{};rm.m[mid]=!rm.m[mid];if(window.Native){try{Native.setAte(mid,!!rm.m[mid]);}catch(e){}}save();render();}
@@ -383,7 +396,7 @@ document.addEventListener("click",function(e){
 });
 
 function fillSettings(){
-  document.getElementById("s-tiny").value=state.tiny;
+  document.getElementById("s-goal").value=state.stepGoal||6000;
   document.getElementById("s-anchor").value=state.anchor;
   document.getElementById("s-habit").value=state.habit;
   var h="";
@@ -399,7 +412,11 @@ document.addEventListener("change",function(e){
   else{var v=t.value.trim();if(!v){t.value=x[p[1]];return;}x[p[1]]=v;}
   save();render();document.getElementById("save-status").textContent="Saved.";
 });
-["tiny","anchor","habit"].forEach(function(f){
+document.getElementById("s-goal").addEventListener("change",function(e){
+  var n=parseInt(e.target.value,10);if(isNaN(n)||n<500||n>50000){e.target.value=state.stepGoal||6000;return;}
+  state.stepGoal=n;save();render();document.getElementById("save-status").textContent="Saved.";
+});
+["anchor","habit"].forEach(function(f){
   document.getElementById("s-"+f).addEventListener("change",function(e){
     var v=e.target.value.trim();if(!v){e.target.value=state[f];return;}
     state[f]=v;save();render();
@@ -437,7 +454,17 @@ fillSettings();render();initCloud();
       if(ch){save();render();}
     }catch(e){}
   }
-  window.nativeResume=load;
+  function steps(){try{N.getSteps();}catch(e){}}
+  window.onSteps=function(r){
+    stepInfo=r;
+    if(r.state==="ok"){
+      var k=ymd(new Date()),rr=rec(k),gl=state.stepGoal||6000;if(rr.rough)gl=Math.round(gl/2);
+      if(r.steps>=gl&&!rr.tiny){rr.tiny=true;lastCheer=CHEERS[Math.floor(Math.random()*CHEERS.length)];save();}
+    }
+    render();
+  };
+  window.nativeResume=function(){load();steps();};
+  steps();setInterval(steps,60000);
   g("p-alarms").addEventListener("change",function(e){put({alarmsOn:e.target.checked});if(e.target.checked)N.askPermissions();});
   g("p-texton").addEventListener("change",function(e){put({textOn:e.target.checked});if(e.target.checked)N.askPermissions();});
   g("p-wife").addEventListener("change",function(e){put({wife:e.target.value});});
