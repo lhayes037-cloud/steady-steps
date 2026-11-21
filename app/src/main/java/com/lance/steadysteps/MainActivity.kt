@@ -22,6 +22,13 @@ class MainActivity : Activity() {
         ws.domStorageEnabled = true
         ws.allowFileAccess = true
         ws.textZoom = 100
+        ws.setSupportZoom(false)
+        ws.builtInZoomControls = false
+        ws.displayZoomControls = false
+        ws.useWideViewPort = true
+        ws.loadWithOverviewMode = true
+        web.overScrollMode = android.view.View.OVER_SCROLL_NEVER
+        web.isHorizontalScrollBarEnabled = false
         ws.mixedContentMode = WebSettings.MIXED_CONTENT_NEVER_ALLOW
         web.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(v: WebView, r: android.webkit.WebResourceRequest): Boolean {

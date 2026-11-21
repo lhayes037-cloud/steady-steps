@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>Steady Steps</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,7 +31,10 @@
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.45}
 body{padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(48px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
-button,input{touch-action:manipulation}
+button,input,select{touch-action:manipulation}
+html,body{overflow-x:hidden;max-width:100%;overscroll-behavior:none}
+.wrap,section,.card,.grid,.stack{min-width:0;max-width:100%}
+input,select,textarea{max-width:100%;min-width:0}
 .wrap{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
 h1,h2,h3{font-family:var(--font-display);font-weight:600;margin:0;text-wrap:balance}
 h1{font-size:26px}
