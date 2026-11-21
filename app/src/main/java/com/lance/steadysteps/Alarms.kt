@@ -124,6 +124,24 @@ object Alarms {
         scheduleText(c)
     }
 
+    fun testRingIn1Min(c: Context) {
+        val i = Intent(c, AlarmReceiver::class.java).setAction("TEST").putExtra("idx", 1)
+        val pi = PendingIntent.getBroadcast(c, 200, i, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+        setClock(c, System.currentTimeMillis() + 60 * 1000L, pi)
+    }
+
+    fun nextAlarmText(c: Context): String {
+        if (!prefs(c).getBoolean("alarmsOn", false)) return "Next alarm: none (alarms are off)"
+        var best: Long = Long.MAX_VALUE
+        var label = ""
+        for (s in SLOTS) {
+            val nt = nextTrigger(c, s, System.currentTimeMillis()) ?: continue
+            if (nt.second < best) { best = nt.second; label = s.title }
+        }
+        if (best == Long.MAX_VALUE) return "Next alarm: none (no work days picked)"
+        return "Next alarm: " + SimpleDateFormat("EEE h:mm a", Locale.US).format(Date(best)) + " (" + label + ")"
+    }
+
     fun snooze(c: Context, idx: Int) {
         (c.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(1000 + idx)
         val s = SLOTS[idx]

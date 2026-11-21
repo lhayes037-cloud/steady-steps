@@ -16,6 +16,7 @@ class Bridge(private val a: MainActivity) {
         o.put("wife", p().getString("wife", ""))
         o.put("days", p().getString("days", "1111111"))
         o.put("last", p().getString("lastSms", ""))
+        o.put("next", Alarms.nextAlarmText(a))
         o.put("build", BuildConfig.VERSION_CODE)
         o.put("version", BuildConfig.VERSION_NAME)
         o.put("smsOk", a.checkSelfPermission(android.Manifest.permission.SEND_SMS) == android.content.pm.PackageManager.PERMISSION_GRANTED)
@@ -40,6 +41,9 @@ class Bridge(private val a: MainActivity) {
 
     @JavascriptInterface
     fun batterySettings() { a.runOnUiThread { a.batterySettings() } }
+
+    @JavascriptInterface
+    fun testAlarm() { Alarms.testRingIn1Min(a) }
 
     @JavascriptInterface
     fun testText(): String = Alarms.sendDinnerText(a)

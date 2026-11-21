@@ -128,6 +128,8 @@ svg text{fill:var(--muted);font-family:var(--font-body);font-size:11px}
     <div class="field"><label class="small" for="p-time">Send the text at</label><input type="time" id="p-time"></div>
     <button class="btn ghost" id="p-perm">Allow alarms and texts</button>
     <button class="btn ghost" id="p-batt">Keep alarms alive (battery)</button>
+    <div class="small" id="p-next"></div>
+    <button class="btn ghost" id="p-testalarm">Test the alarm (rings in 1 minute)</button>
     <button class="btn ghost" id="p-test">Send today's dinner text now</button>
     <div class="small" id="p-status"></div>
     <div class="label" style="margin-top:6px">App version</div>
@@ -406,7 +408,7 @@ fillSettings();render();initCloud();
   var cfg={};
   var DN=["M","T","W","T","F","S","S"];
   function g(id){return document.getElementById(id);}
-  function put(o){try{N.setConfig(JSON.stringify(o));}catch(e){}}
+  function put(o){try{N.setConfig(JSON.stringify(o));var c2=JSON.parse(N.getConfig());g("p-next").textContent=c2.next||"";}catch(e){}}
   function mins(v){var p=(v||"08:00").split(":");return parseInt(p[0],10)*60+parseInt(p[1],10);}
   function hhmm(m){var h=Math.floor(m/60),mm=m%60;return (h<10?"0":"")+h+":"+(mm<10?"0":"")+mm;}
   function paintDays(){
@@ -418,6 +420,7 @@ fillSettings();render();initCloud();
     try{cfg=JSON.parse(N.getConfig());}catch(e){return;}
     g("p-alarms").checked=!!cfg.alarmsOn;g("p-texton").checked=!!cfg.textOn;
     g("p-wife").value=cfg.wife||"";g("p-time").value=hhmm(cfg.textMin);
+    g("p-next").textContent=cfg.next||"";
     g("p-build").textContent="Build "+cfg.build+" ("+cfg.version+")";
     g("p-status").textContent=(cfg.smsOk?"Texts allowed. ":"Texts not allowed yet. ")+(cfg.last?"Last text: "+cfg.last:"");
     paintDays();
@@ -434,6 +437,7 @@ fillSettings();render();initCloud();
   g("p-days").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var i=parseInt(b.getAttribute("data-d"),10),s=(cfg.days||"1111111").split("");s[i]=s[i]==="1"?"0":"1";cfg.days=s.join("");put({days:cfg.days});paintDays();});
   g("p-perm").addEventListener("click",function(){N.askPermissions();});
   g("p-batt").addEventListener("click",function(){N.batterySettings();});
+  g("p-testalarm").addEventListener("click",function(){N.testAlarm();g("p-next").textContent="Test alarm set. Lock your phone and wait one minute.";});
   g("p-test").addEventListener("click",function(){g("p-status").textContent=N.testText();});
   g("p-update").addEventListener("click",function(){g("p-upd").textContent="Checking...";N.checkUpdate();});
   window.onUpdate=function(r){

@@ -12,6 +12,7 @@ class AlarmReceiver : BroadcastReceiver() {
                 if (!Alarms.isAte(c, Alarms.SLOTS[idx].id)) Alarms.ring(c, idx)
                 Alarms.scheduleOne(c, idx)
             }
+            "TEST" -> Alarms.ring(c, idx)
             "ATE" -> Alarms.setAte(c, Alarms.SLOTS[idx].id, true)
             "SNOOZE" -> Alarms.snooze(c, idx)
             "TEXT" -> {
