@@ -293,9 +293,17 @@ function render(){
 }
 
 var CHECK_SM=CHECK.replace('width="22" height="22"','width="16" height="16"');
+var OFFMEALS={
+  3:[{id:"off_b",when:"Breakfast",name:"Egg white scramble with diced pepper and tomato (4 egg whites), plus a cup of grapes",cal:200},
+     {id:"off_l",when:"Lunch",name:"Turkey and bean bowl: 4 oz lean ground turkey, romaine, tomato, 1/4 cup black beans, salsa",cal:330}],
+  4:[{id:"off_b",when:"Breakfast",name:"Veggie omelet: 1 whole egg and 3 egg whites with pepper and onion, plus an apple",cal:230},
+     {id:"off_l",when:"Lunch",name:"Chicken and veggie rice bowl: 4 oz chicken breast, 1 cup stir fry vegetables, 1/3 cup rice, splash of soy sauce",cal:340}]
+};
+function todayMeals(){var o=OFFMEALS[new Date().getDay()];return o||state.meals;}
 function renderFood(r){
   var el=document.getElementById("food-card"),m=r.m||{},cal=0,rows="";
-  state.meals.forEach(function(x){
+  var isOff=!!OFFMEALS[new Date().getDay()];
+  todayMeals().forEach(function(x){
     var on=!!m[x.id];if(on)cal+=Number(x.cal)||0;
     rows+='<button class="meal'+(on?' on':'')+'" data-act="meal" data-id="'+esc(x.id)+'" aria-pressed="'+on+'"><span class="tick">'+(on?CHECK_SM:'')+'</span><span class="mt"><b>'+esc(x.name)+'</b><span class="small">'+esc(x.when)+' &middot; about '+(Number(x.cal)||0)+' cal</span></span></button>';
   });
@@ -303,8 +311,8 @@ function renderFood(r){
   var wk=0;for(var i=0;i<7;i++){var d=state.days[ymd(addDays(new Date(),-i))];if(d&&d.juice)wk+=d.juice;}
   var dn=!!r.dinner;
   el.innerHTML=
-    '<div class="label">Today\'s food plan</div>'+
-    '<div class="small">Eat anytime inside the window. If it gets busy, eat when you finish.</div>'+rows+
+    '<div class="label">Today\'s food plan'+(isOff?' (day off)':'')+'</div>'+
+    '<div class="small">'+(isOff?'Day off meals. Eat when you are hungry, not by the clock.':'Eat anytime inside the window. If it gets busy, eat when you finish.')+'</div>'+rows+
     '<div class="juice"><div><b>Juice today</b><br><span class="small">Default is none. About '+jc+' cal each. This week: '+wk+'</span></div><div class="stepper"><button data-act="juice-down" aria-label="One less juice">&minus;</button><b class="num" aria-live="polite">'+j+'</b><button data-act="juice-up" aria-label="One more juice">+</button></div></div>'+
     '<button class="meal'+(dn?' on':'')+'" data-act="dinner" aria-pressed="'+dn+'"><span class="tick">'+(dn?CHECK_SM:'')+'</span><span class="mt"><b>Regular dinner at home</b><span class="small">One normal plate. Not a make-up meal.</span></span></button>'+
     '<div class="msg">About '+cal+' calories logged so far (dinner not counted)</div>';
@@ -412,7 +420,7 @@ fillSettings();render();initCloud();
   function mins(v){var p=(v||"08:00").split(":");return parseInt(p[0],10)*60+parseInt(p[1],10);}
   function hhmm(m){var h=Math.floor(m/60),mm=m%60;return (h<10?"0":"")+h+":"+(mm<10?"0":"")+mm;}
   function paintDays(){
-    var s=cfg.days||"1111111",h="";
+    var s=cfg.days||"1100111",h="";
     for(var i=0;i<7;i++){h+='<button type="button" class="btn ghost" data-d="'+i+'" style="width:44px;min-height:44px;padding:0;font-size:15px;'+(s[i]==="1"?"background:var(--go);color:var(--go-ink);border:0":"")+'">'+DN[i]+'</button>';}
     g("p-days").innerHTML=h;
   }
@@ -434,7 +442,7 @@ fillSettings();render();initCloud();
   g("p-texton").addEventListener("change",function(e){put({textOn:e.target.checked});if(e.target.checked)N.askPermissions();});
   g("p-wife").addEventListener("change",function(e){put({wife:e.target.value});});
   g("p-time").addEventListener("change",function(e){put({textMin:mins(e.target.value)});});
-  g("p-days").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var i=parseInt(b.getAttribute("data-d"),10),s=(cfg.days||"1111111").split("");s[i]=s[i]==="1"?"0":"1";cfg.days=s.join("");put({days:cfg.days});paintDays();});
+  g("p-days").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var i=parseInt(b.getAttribute("data-d"),10),s=(cfg.days||"1100111").split("");s[i]=s[i]==="1"?"0":"1";cfg.days=s.join("");put({days:cfg.days});paintDays();});
   g("p-perm").addEventListener("click",function(){N.askPermissions();});
   g("p-batt").addEventListener("click",function(){N.batterySettings();});
   g("p-testalarm").addEventListener("click",function(){N.testAlarm();g("p-next").textContent="Test alarm set. Lock your phone and wait one minute.";});

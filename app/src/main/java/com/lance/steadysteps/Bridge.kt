@@ -14,7 +14,7 @@ class Bridge(private val a: MainActivity) {
         o.put("textOn", p().getBoolean("textOn", false))
         o.put("textMin", p().getInt("textMin", 480))
         o.put("wife", p().getString("wife", ""))
-        o.put("days", p().getString("days", "1111111"))
+        o.put("days", p().getString("days", "1100111"))
         o.put("last", p().getString("lastSms", ""))
         o.put("next", Alarms.nextAlarmText(a))
         o.put("build", BuildConfig.VERSION_CODE)

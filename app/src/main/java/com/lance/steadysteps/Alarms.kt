@@ -45,7 +45,7 @@ object Alarms {
     }
 
     private fun workDay(c: Context, cal: Calendar): Boolean {
-        val s = prefs(c).getString("days", "1111111")!!
+        val s = prefs(c).getString("days", "1100111")!!
         return s[Dinners.todayIndex(cal)] == '1'
     }
 
