@@ -102,6 +102,7 @@ svg text{fill:var(--muted);font-family:var(--font-body);font-size:11px}
 </head>
 <body>
 <div class="wrap">
+  <div id="upd-banner" style="display:none;background:var(--go);color:var(--go-ink);border-radius:14px;padding:12px 14px;font-weight:700;align-items:center;justify-content:space-between;gap:10px"><span id="upd-text"></span><button class="btn" id="upd-go" style="background:#14213D;color:#fff;min-height:44px;padding:0 16px;border-radius:999px;border:0;font-weight:700">Update</button></div>
   <header>
     <div>
       <h1>Steady Steps</h1>
@@ -482,12 +483,14 @@ fillSettings();render();initCloud();
   g("p-test").addEventListener("click",function(){g("p-status").textContent=N.testText();});
   g("p-update").addEventListener("click",function(){g("p-upd").textContent="Checking...";N.checkUpdate();});
   window.onUpdate=function(r){
+    if(r.ok&&r.newer){var ub=g("upd-banner");g("upd-text").textContent="Build "+r.latest+" is ready";ub.style.display="flex";g("upd-go").onclick=function(){g("upd-text").textContent="Downloading...";N.installUpdate(r.url);};}
     if(!r.ok){g("p-upd").textContent="Could not check: "+r.error;return;}
     if(!r.newer){g("p-upd").textContent="You are on the latest build ("+r.have+").";return;}
     g("p-upd").innerHTML='Build '+r.latest+' is ready. <button class="btn" id="p-go" style="margin-top:8px">Update now</button>';
     g("p-go").onclick=function(){g("p-upd").textContent="Downloading...";N.installUpdate(r.url);};
   };
-  window.onUpdateStatus=function(t){g("p-upd").textContent=t;};
+  window.onUpdateStatus=function(t){g("p-upd").textContent=t;var ut=g("upd-text");if(ut&&g("upd-banner").style.display==="flex")ut.textContent=t;};
+  setTimeout(function(){try{N.checkUpdate();}catch(e){}},1500);
   var oldClick=null;
   load();
   try{N.checkUpdate();}catch(e){}
