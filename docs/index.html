@@ -47,8 +47,8 @@ a.link{color:#2F5BFF}
   <div class="serv"><span>Servings</span><div class="step"><button id="minus" aria-label="Fewer servings">&minus;</button><b id="sv">1</b><button class="plus" id="plus" aria-label="More servings">+</button></div></div>
   <section><h2>Ingredients</h2><div id="ings"></div></section>
   <section><h2>Steps</h2><ol id="steps"></ol></section>
-  <section id="grocery"><h2>Grocery list for the week</h2><div class="meta" id="store" style="color:#5C5648;margin:-4px 0 4px"></div><div class="meta" style="color:#5C5648;margin:0 0 10px">Everything is listed the way it is sold, so you buy whole packs and whole veggies. The recipe amounts above are what you use from them. Prices checked on Walmart.com on Nov 20, 2026, they can change by store and day. Fresh items scale with servings, pantry items stay the same. Tap to check off.</div><div id="shop"></div></section>
-  <a class="big" style="display:block;text-align:center;text-decoration:none;background:#FF7A1A;color:#14213D;font-weight:700;border-radius:12px;padding:14px;margin:0 20px 12px" href="week.html">See all dinners this week</a>
+  <a class="big" style="display:block;text-align:center;text-decoration:none;background:#FF7A1A;color:#14213D;font-weight:700;border-radius:12px;padding:14px;margin:6px 20px 10px" href="week.html">See all dinners this week</a>
+  <a class="big" style="display:block;text-align:center;text-decoration:none;background:#14213D;color:#fff;font-weight:700;border-radius:12px;padding:14px;margin:0 20px 12px" href="grocery.html">Grocery list for the week</a>
   <div class="note">The amounts change with the servings number. Tap an ingredient to check it off.</div>
 </div>
 <script>
@@ -62,21 +62,6 @@ a.link{color:#2F5BFF}
   function store(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
   var checked=load("checked",{});
   function day(){return data.days.filter(function(d){return d.key===cur;})[0];}
-  function renderShop(){
-    if(!data.shop)return;
-    var tot=0,pan=0,h="";
-    data.shop.forEach(function(sec){
-      var pantry=sec.section.indexOf("Pantry")===0;
-      h+='<div class="cat">'+sec.section+'</div>';
-      sec.items.forEach(function(i){
-        var mult=pantry?1:n,price=i.p*mult;tot+=price;if(pantry)pan+=price;
-        var id="s:"+i.n;h+='<button class="row '+(checked[id]?"done":"")+'" data-id="'+id+'"><span class="box">'+(checked[id]?"\u2713":"")+'</span><span class="t" style="flex:1">'+(mult>1?mult+" x ":"")+i.n+'</span><b>$'+price.toFixed(2)+'</b></button>';
-      });
-    });
-    h+='<div class="row" style="cursor:default;background:#14213D;color:#fff;margin-top:10px"><span class="t" style="flex:1">About total, first trip</span><b>$'+Math.round(tot)+'</b></div>';
-    h+='<div class="row" style="cursor:default"><span class="t" style="flex:1">About total after that (pantry already stocked)</span><b>$'+Math.round(tot-pan)+'</b></div>';
-    q("shop").innerHTML=h;
-  }
   function render(){
     var d=day();
     q("eye").textContent=d.day+" dinner";
@@ -89,7 +74,6 @@ a.link{color:#2F5BFF}
       return '<button class="row '+(checked[id]?"done":"")+'" data-id="'+id+'"><span class="box">'+(checked[id]?"✓":"")+'</span><span class="t">'+line(i,n)+'</span></button>';
     }).join("");
     q("steps").innerHTML=d.steps.map(function(s,ix){return '<li><i>'+(ix+1)+'</i><span>'+s+'</span></li>';}).join("");
-    renderShop();
   }
   document.addEventListener("click",function(e){
     var t=e.target.closest("button");if(!t)return;
@@ -102,7 +86,6 @@ a.link{color:#2F5BFF}
   fetch("recipes.json").then(function(r){return r.json();}).then(function(j){
     data=j;
 
-    if(j.store){q("store").textContent="Shop at "+j.store;}
     var p=new URLSearchParams(location.search).get("d");
     cur=KEYS.indexOf(p)>=0?p:KEYS[new Date().getDay()];
     n=load("servings",1);
