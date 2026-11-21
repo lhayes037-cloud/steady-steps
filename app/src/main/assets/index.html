@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Steady Steps</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,7 +30,8 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.45}
-body{padding:16px 16px 48px}
+body{padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(48px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+button,input{touch-action:manipulation}
 .wrap{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
 h1,h2,h3{font-family:var(--font-display);font-weight:600;margin:0;text-wrap:balance}
 h1{font-size:26px}
@@ -43,7 +44,8 @@ header{display:flex;justify-content:space-between;align-items:center;gap:12px;fl
 .bar>i{display:block;height:100%;background:var(--good);border-radius:999px;transition:width .4s}
 .small{font-size:14px;color:var(--muted)}
 .grid{display:grid;gap:16px;grid-template-columns:1fr}
-@media (min-width:680px){.grid{grid-template-columns:1fr 1fr;align-items:start}}
+@media (min-width:600px){.grid{grid-template-columns:1fr 1fr;align-items:start}}
+@media (min-width:600px){body{font-size:17px}.wrap{gap:20px}}
 .stack{display:flex;flex-direction:column;gap:16px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:12px}
 .label{font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}

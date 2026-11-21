@@ -21,6 +21,7 @@ class MainActivity : Activity() {
         ws.javaScriptEnabled = true
         ws.domStorageEnabled = true
         ws.allowFileAccess = true
+        ws.textZoom = 100
         ws.mixedContentMode = WebSettings.MIXED_CONTENT_NEVER_ALLOW
         web.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(v: WebView, r: android.webkit.WebResourceRequest): Boolean {
@@ -30,6 +31,8 @@ class MainActivity : Activity() {
             }
         }
         web.addJavascriptInterface(Bridge(this), "Native")
+        window.statusBarColor = android.graphics.Color.parseColor("#14213D")
+        window.navigationBarColor = android.graphics.Color.parseColor("#14213D")
         setContentView(web)
         web.loadUrl("file:///android_asset/index.html")
         Alarms.scheduleAll(this)
