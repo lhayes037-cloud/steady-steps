@@ -260,9 +260,9 @@ function render(){
     var pct=Math.min(100,Math.round(stepInfo.steps*100/goalToday));
     stepHtml='<div class="big">'+stepInfo.steps.toLocaleString()+' / '+goalToday.toLocaleString()+' steps</div>'+
       '<div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+pct+'" aria-label="Steps today"><i style="width:'+pct+'%"></i></div>'+
-      (r.tiny?'<div class="msg">'+CHECK+' Step goal done. '+esc(lastCheer||CHEERS[new Date().getDate()%CHEERS.length])+'</div>':'<div class="small">'+Math.max(0,goalToday-stepInfo.steps).toLocaleString()+' to go. Counted from your watch through Samsung Health.</div>');
+      (stepInfo.steps===0?'<div class="small">No steps from your watch yet. In Samsung Health, open Settings, then Health Connect, and allow Steps to be shared. Then walk a little and come back.</div>':'')+(r.tiny?'<div class="msg">'+CHECK+' Step goal done. '+esc(lastCheer||CHEERS[new Date().getDate()%CHEERS.length])+'</div>':'<div class="small">'+Math.max(0,goalToday-stepInfo.steps).toLocaleString()+' to go. Counted from your watch through Samsung Health.</div>');
   }else if(stepInfo.state==="perm"){
-    stepHtml='<div class="big">'+goalToday.toLocaleString()+' steps today</div><div class="small">Connect your watch steps so this counts by itself.</div><button class="btn" data-act="stepperm">Connect watch steps</button>';
+    stepHtml='<div class="big">'+goalToday.toLocaleString()+' steps today</div><div class="small">Connect your watch steps so this counts by itself. If no box pops up, open Settings, then Apps, Health Connect, App permissions, Steady Steps, and allow Steps.</div><button class="btn" data-act="stepperm">Connect watch steps</button>';
   }else{
     stepHtml='<div class="big">'+goalToday.toLocaleString()+' steps today</div>'+
       '<div class="small">'+(stepInfo.state==="unavailable"?'Health Connect is not ready on this phone, so steps cannot be counted here yet.':'Steps count automatically inside the phone app.')+'</div>'+

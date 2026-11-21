@@ -64,9 +64,7 @@ class Bridge(private val a: MainActivity) {
 
     @JavascriptInterface
     fun askSteps() {
-        a.runOnUiThread {
-            try { a.startActivityForResult(Steps.permissionIntent(a), 9) } catch (e: Exception) { }
-        }
+        a.runOnUiThread { a.askStepsPermission() }
     }
 
     @JavascriptInterface

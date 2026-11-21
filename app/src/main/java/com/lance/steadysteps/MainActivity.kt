@@ -80,6 +80,21 @@ class MainActivity : Activity() {
         web.evaluateJavascript("window.nativeResume&&window.nativeResume()", null)
     }
 
+    fun askStepsPermission() {
+        try {
+            if (Build.VERSION.SDK_INT >= 34) {
+                // On Android 14 and newer, Health Connect permissions are normal runtime permissions.
+                requestPermissions(arrayOf(Steps.PERM), 9)
+                return
+            }
+            startActivityForResult(Steps.permissionIntent(this), 9)
+        } catch (e: Exception) {
+            try {
+                startActivity(Intent(androidx.health.connect.client.HealthConnectClient.ACTION_HEALTH_CONNECT_SETTINGS))
+            } catch (e2: Exception) { }
+        }
+    }
+
     fun batterySettings() {
         try {
             startActivity(Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:$packageName")))
