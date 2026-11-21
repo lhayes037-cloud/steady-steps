@@ -34,6 +34,10 @@ ol li i{font-style:normal;width:28px;height:28px;border-radius:50%;background:va
 .cat{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin:14px 0 6px}
 .note{margin:0 20px;padding:12px 14px;border:1px dashed #B8AE96;border-radius:12px;font-size:14px;color:var(--mut)}
 a.link{color:#2F5BFF}
+.pg{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:space-between;gap:8px;background:#14213D;color:#fff;padding:10px 12px;z-index:9}
+.pg a{color:#fff;text-decoration:none;font-weight:700;font-size:14px;min-height:44px;display:flex;align-items:center;padding:0 12px;border-radius:999px;border:1px solid #FF7A1A;white-space:nowrap}
+.pg b{font-family:'Fredoka',sans-serif;font-weight:500;font-size:16px;text-align:center;flex:1}
+body{padding-bottom:70px}
 </style>
 </head>
 <body>
@@ -45,7 +49,6 @@ a.link{color:#2F5BFF}
   </header>
   <div class="serv"><span>Servings</span><div class="step"><button id="minus" aria-label="Fewer servings">&minus;</button><b id="sv">1</b><button class="plus" id="plus" aria-label="More servings">+</button></div></div>
   <section><div class="meta" style="color:#5C5648;margin:0 0 10px">Everything is listed the way it is sold, so you buy whole packs and whole veggies. The recipe pages tell you how much you use from them. Prices checked on Walmart.com on Nov 20, 2026, they can change by store and day. Fresh items scale with servings, pantry items stay the same. Tap to check off.</div><div id="shop"></div></section>
-  <a class="big" style="display:block;text-align:center;text-decoration:none;background:#FF7A1A;color:#14213D;font-weight:700;border-radius:12px;padding:14px;margin:6px 20px 10px" href="week.html">See all dinners this week</a>
 </div>
 <script>
 (function(){
@@ -83,5 +86,7 @@ a.link{color:#2F5BFF}
   }).catch(function(){q("store").textContent="Could not load the list. Try again.";});
 })();
 </script>
+<nav class="pg"><a id="pv" href="index.html?d={TODAY}">&#8249; Recipe</a><b>Grocery list</b><a id="nx" href="week.html">Week &#8250;</a></nav>
+<script>(function(){var K=["sun","mon","tue","wed","thu","fri","sat"],t=K[new Date().getDay()];Array.prototype.forEach.call(document.querySelectorAll('.pg a'),function(a){a.href=a.getAttribute('href').replace('{TODAY}',t);});})();</script>
 </body>
 </html>

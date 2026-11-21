@@ -40,6 +40,10 @@ a.link{color:#2F5BFF}
 .day .m{font-size:14px;color:var(--mut)}
 .day.today{border-color:var(--orange);border-width:2px}
 .big{display:block;text-align:center;text-decoration:none;background:var(--orange);color:var(--navy);font-weight:700;border-radius:12px;padding:14px;margin:0 20px 10px}
+.pg{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:space-between;gap:8px;background:#14213D;color:#fff;padding:10px 12px;z-index:9}
+.pg a{color:#fff;text-decoration:none;font-weight:700;font-size:14px;min-height:44px;display:flex;align-items:center;padding:0 12px;border-radius:999px;border:1px solid #FF7A1A;white-space:nowrap}
+.pg b{font-family:'Fredoka',sans-serif;font-weight:500;font-size:16px;text-align:center;flex:1}
+body{padding-bottom:70px}
 </style>
 </head>
 <body>
@@ -50,7 +54,6 @@ a.link{color:#2F5BFF}
     <div class="meta">Tap a dinner for the ingredients and steps.</div>
   </header>
   <section><div id="days"></div></section>
-  <a class="big" href="grocery.html">Grocery list for the week</a>
 </div>
 <script>
 fetch("recipes.json").then(function(r){return r.json();}).then(function(d){
@@ -60,5 +63,7 @@ fetch("recipes.json").then(function(r){return r.json();}).then(function(d){
   }).join("");
 });
 </script>
+<nav class="pg"><a id="pv" href="grocery.html">&#8249; Grocery</a><b>Week plan</b><a id="nx" href="index.html?d={TODAY}">Recipe &#8250;</a></nav>
+<script>(function(){var K=["sun","mon","tue","wed","thu","fri","sat"],t=K[new Date().getDay()];Array.prototype.forEach.call(document.querySelectorAll('.pg a'),function(a){a.href=a.getAttribute('href').replace('{TODAY}',t);});})();</script>
 </body>
 </html>
