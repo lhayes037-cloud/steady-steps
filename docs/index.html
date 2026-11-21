@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dinner</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F1E7;--ink:#14213D;--navy:#14213D;--orange:#FF7A1A;--line:#E3DBC9;--mut:#5C5648}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Nunito Sans',system-ui,sans-serif;font-size:17px}
+.wrap{max-width:560px;margin:0 auto;padding-bottom:40px}
+header{background:var(--navy);color:#fff;padding:36px 20px 22px}
+.eye{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#FFB77A}
+h1{font-family:'Fredoka',sans-serif;font-weight:600;font-size:28px;line-height:1.15;margin:6px 0}
+.meta{font-size:14px;color:#DCE3F0}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:12px 16px;background:#fff;border-bottom:1px solid var(--line)}
+.tabs button{flex:none;border:1px solid var(--line);background:#fff;border-radius:999px;padding:10px 14px;font:700 14px 'Nunito Sans',sans-serif;color:var(--ink);min-height:44px}
+.tabs button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.serv{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:#fff;border-bottom:1px solid var(--line);font-weight:700}
+.step{display:flex;align-items:center;gap:14px}
+.step button{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--navy);background:#fff;font-size:22px;color:var(--navy)}
+.step button.plus{background:var(--orange);border:0}
+.step b{font-family:'Fredoka',sans-serif;font-size:26px;min-width:28px;text-align:center}
+section{padding:18px 20px 4px}
+h2{font-family:'Fredoka',sans-serif;font-weight:500;font-size:20px;margin:0 0 10px}
+.row{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:8px;min-height:48px;cursor:pointer;width:100%;text-align:left;font:inherit;color:inherit}
+.box{width:24px;height:24px;border-radius:7px;border:1.5px solid #B8AE96;flex:none;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px}
+.row.done .box{background:var(--orange);border-color:var(--orange);color:var(--navy)}
+.row.done span.t{opacity:.45;text-decoration:line-through}
+ol{padding:0;margin:0;list-style:none}
+ol li{display:flex;gap:12px;margin-bottom:12px;line-height:1.45}
+ol li i{font-style:normal;width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
+.cat{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin:14px 0 6px}
+.note{margin:0 20px;padding:12px 14px;border:1px dashed #B8AE96;border-radius:12px;font-size:14px;color:var(--mut)}
+a.link{color:#2F5BFF}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eye" id="eye"></div>
+    <h1 id="title">Loading...</h1>
+    <div class="meta" id="meta"></div>
+  </header>
+  <div class="tabs" id="tabs"></div>
+  <div class="serv"><span>Servings</span><div class="step"><button id="minus" aria-label="Fewer servings">&minus;</button><b id="sv">1</b><button class="plus" id="plus" aria-label="More servings">+</button></div></div>
+  <section><h2>Ingredients</h2><div id="ings"></div></section>
+  <section><h2>Steps</h2><ol id="steps"></ol></section>
+  <section><h2>Grocery list for the week</h2><div id="groc"></div></section>
+  <div class="note">The amounts change with the servings number. Tap an ingredient to check it off.</div>
+</div>
+<script>
+(function(){
+  var data=null,cur="mon",n=1;
+  var KEYS=["sun","mon","tue","wed","thu","fri","sat"];
+  function q(id){return document.getElementById(id);}
+  function fmt(v){var r=Math.round(v*100)/100;return String(r);}
+  function line(i,mult){var a=i.a*mult;return fmt(a)+(i.u?" "+i.u:"")+" "+i.n;}
+  function load(k,v){try{return JSON.parse(localStorage.getItem(k)||"null")||v;}catch(e){return v;}}
+  function store(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+  var checked=load("checked",{});
+  function day(){return data.days.filter(function(d){return d.key===cur;})[0];}
+  function render(){
+    var d=day();
+    q("eye").textContent=d.day+" dinner";
+    q("title").textContent=d.title;
+    q("meta").textContent="About "+d.time+" · "+d.cal+" calories per serving";
+    q("sv").textContent=n;
+    q("tabs").innerHTML=data.days.map(function(x){return '<button data-k="'+x.key+'" class="'+(x.key===cur?"on":"")+'">'+x.day.slice(0,3)+'</button>';}).join("");
+    q("ings").innerHTML=d.ingredients.map(function(i,ix){
+      var id=cur+":"+ix;
+      return '<button class="row '+(checked[id]?"done":"")+'" data-id="'+id+'"><span class="box">'+(checked[id]?"✓":"")+'</span><span class="t">'+line(i,n)+'</span></button>';
+    }).join("");
+    q("steps").innerHTML=d.steps.map(function(s,ix){return '<li><i>'+(ix+1)+'</i><span>'+s+'</span></li>';}).join("");
+    var cats={};
+    data.days.forEach(function(dd){dd.ingredients.forEach(function(i){
+      var key=i.n+"|"+i.u;cats[i.c]=cats[i.c]||{};
+      cats[i.c][key]=cats[i.c][key]||{n:i.n,u:i.u,a:0};cats[i.c][key].a+=i.a;
+    });});
+    var h="";
+    ["Produce","Meat","Dairy","Pantry"].forEach(function(c){
+      if(!cats[c])return;
+      h+='<div class="cat">'+c+'</div>';
+      Object.keys(cats[c]).sort().forEach(function(k){
+        var i=cats[c][k],id="g:"+k;
+        h+='<button class="row '+(checked[id]?"done":"")+'" data-id="'+id+'"><span class="box">'+(checked[id]?"✓":"")+'</span><span class="t">'+line(i,n)+'</span></button>';
+      });
+    });
+    q("groc").innerHTML=h;
+  }
+  document.addEventListener("click",function(e){
+    var t=e.target.closest("button");if(!t)return;
+    if(t.id==="plus"){n=Math.min(8,n+1);render();return;}
+    if(t.id==="minus"){n=Math.max(1,n-1);render();return;}
+    if(t.getAttribute("data-k")){cur=t.getAttribute("data-k");render();window.scrollTo(0,0);return;}
+    var id=t.getAttribute("data-id");
+    if(id){checked[id]=!checked[id];store("checked",checked);render();}
+  });
+  fetch("recipes.json").then(function(r){return r.json();}).then(function(j){
+    data=j;
+    var p=new URLSearchParams(location.search).get("d");
+    cur=KEYS.indexOf(p)>=0?p:KEYS[new Date().getDay()];
+    n=load("servings",1);
+    var oldRender=render;render=function(){store("servings",n);oldRender();};
+    render();
+  }).catch(function(){q("title").textContent="Could not load the recipes. Try again.";});
+})();
+</script>
+</body>
+</html>

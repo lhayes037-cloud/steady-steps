@@ -1,0 +1,358 @@
+{
+ "days": [
+  {
+   "key": "mon",
+   "day": "Monday",
+   "title": "Lemon Garlic Chicken with Roasted Broccoli and Rice",
+   "time": "30 min",
+   "cal": 430,
+   "ingredients": [
+    {
+     "n": "chicken breast",
+     "a": 6,
+     "u": "oz",
+     "c": "Meat"
+    },
+    {
+     "n": "broccoli florets",
+     "a": 1.5,
+     "u": "cups",
+     "c": "Produce"
+    },
+    {
+     "n": "cooked rice",
+     "a": 0.5,
+     "u": "cup",
+     "c": "Pantry"
+    },
+    {
+     "n": "lemon",
+     "a": 0.5,
+     "u": "",
+     "c": "Produce"
+    },
+    {
+     "n": "garlic clove",
+     "a": 1,
+     "u": "",
+     "c": "Produce"
+    },
+    {
+     "n": "olive oil",
+     "a": 1,
+     "u": "tsp",
+     "c": "Pantry"
+    }
+   ],
+   "steps": [
+    "Heat the oven to 425. Start the rice.",
+    "Toss the chicken with lemon juice, minced garlic, half the oil, salt and pepper. Put it on a sheet pan.",
+    "Toss the broccoli with the rest of the oil and a pinch of salt. Put it on the same pan.",
+    "Bake 20 to 22 minutes, until the chicken reaches 165. Serve over the rice."
+   ]
+  },
+  {
+   "key": "tue",
+   "day": "Tuesday",
+   "title": "Turkey Taco Lettuce Bowls",
+   "time": "25 min",
+   "cal": 400,
+   "ingredients": [
+    {
+     "n": "lean ground turkey",
+     "a": 5,
+     "u": "oz",
+     "c": "Meat"
+    },
+    {
+     "n": "romaine, chopped",
+     "a": 2,
+     "u": "cups",
+     "c": "Produce"
+    },
+    {
+     "n": "tomato, diced",
+     "a": 0.5,
+     "u": "",
+     "c": "Produce"
+    },
+    {
+     "n": "black beans, drained",
+     "a": 0.25,
+     "u": "cup",
+     "c": "Pantry"
+    },
+    {
+     "n": "taco seasoning",
+     "a": 1,
+     "u": "tsp",
+     "c": "Pantry"
+    },
+    {
+     "n": "plain Greek yogurt",
+     "a": 2,
+     "u": "tbsp",
+     "c": "Dairy"
+    },
+    {
+     "n": "salsa",
+     "a": 2,
+     "u": "tbsp",
+     "c": "Pantry"
+    }
+   ],
+   "steps": [
+    "Brown the turkey in a dry pan, 6 to 8 minutes.",
+    "Stir in the taco seasoning, beans and a splash of water. Cook 3 minutes.",
+    "Fill a bowl with the lettuce and tomato. Spoon the turkey on top.",
+    "Finish with the yogurt and salsa."
+   ]
+  },
+  {
+   "key": "wed",
+   "day": "Wednesday",
+   "title": "Baked Salmon with Green Beans and Sweet Potato",
+   "time": "35 min",
+   "cal": 470,
+   "ingredients": [
+    {
+     "n": "salmon fillet",
+     "a": 5,
+     "u": "oz",
+     "c": "Meat"
+    },
+    {
+     "n": "green beans",
+     "a": 1.5,
+     "u": "cups",
+     "c": "Produce"
+    },
+    {
+     "n": "sweet potato, small",
+     "a": 1,
+     "u": "",
+     "c": "Produce"
+    },
+    {
+     "n": "lemon",
+     "a": 0.25,
+     "u": "",
+     "c": "Produce"
+    },
+    {
+     "n": "olive oil",
+     "a": 1,
+     "u": "tsp",
+     "c": "Pantry"
+    }
+   ],
+   "steps": [
+    "Heat the oven to 400. Cube the sweet potato and roast it with half the oil for 15 minutes.",
+    "Add the green beans to the pan with the rest of the oil and salt. Nestle in the salmon.",
+    "Roast 12 to 14 minutes, until the salmon flakes.",
+    "Squeeze the lemon over everything."
+   ]
+  },
+  {
+   "key": "thu",
+   "day": "Thursday",
+   "title": "Chicken and Veggie Stir Fry over Rice",
+   "time": "25 min",
+   "cal": 440,
+   "ingredients": [
+    {
+     "n": "chicken breast, sliced",
+     "a": 5,
+     "u": "oz",
+     "c": "Meat"
+    },
+    {
+     "n": "stir fry vegetables",
+     "a": 2,
+     "u": "cups",
+     "c": "Produce"
+    },
+    {
+     "n": "cooked rice",
+     "a": 0.5,
+     "u": "cup",
+     "c": "Pantry"
+    },
+    {
+     "n": "low sodium soy sauce",
+     "a": 1,
+     "u": "tbsp",
+     "c": "Pantry"
+    },
+    {
+     "n": "garlic clove",
+     "a": 1,
+     "u": "",
+     "c": "Produce"
+    },
+    {
+     "n": "sesame oil",
+     "a": 1,
+     "u": "tsp",
+     "c": "Pantry"
+    }
+   ],
+   "steps": [
+    "Heat the oil in a large pan on high. Cook the chicken 5 to 6 minutes until done, then set aside.",
+    "Cook the vegetables and garlic 4 minutes.",
+    "Return the chicken, add the soy sauce and toss 1 minute.",
+    "Serve over the rice."
+   ]
+  },
+  {
+   "key": "fri",
+   "day": "Friday",
+   "title": "Shrimp and Veggie Skillet with Quinoa",
+   "time": "25 min",
+   "cal": 420,
+   "ingredients": [
+    {
+     "n": "shrimp, peeled",
+     "a": 6,
+     "u": "oz",
+     "c": "Meat"
+    },
+    {
+     "n": "zucchini, sliced",
+     "a": 1,
+     "u": "cup",
+     "c": "Produce"
+    },
+    {
+     "n": "bell pepper, sliced",
+     "a": 0.5,
+     "u": "",
+     "c": "Produce"
+    },
+    {
+     "n": "cooked quinoa",
+     "a": 0.5,
+     "u": "cup",
+     "c": "Pantry"
+    },
+    {
+     "n": "garlic clove",
+     "a": 1,
+     "u": "",
+     "c": "Produce"
+    },
+    {
+     "n": "olive oil",
+     "a": 1,
+     "u": "tsp",
+     "c": "Pantry"
+    },
+    {
+     "n": "paprika",
+     "a": 0.5,
+     "u": "tsp",
+     "c": "Pantry"
+    }
+   ],
+   "steps": [
+    "Heat the oil in a skillet. Cook the zucchini and pepper 5 minutes.",
+    "Add the garlic, paprika and shrimp. Cook 3 to 4 minutes until pink.",
+    "Serve over the quinoa."
+   ]
+  },
+  {
+   "key": "sat",
+   "day": "Saturday",
+   "title": "Turkey and Bean Chili",
+   "time": "40 min",
+   "cal": 410,
+   "ingredients": [
+    {
+     "n": "lean ground turkey",
+     "a": 4,
+     "u": "oz",
+     "c": "Meat"
+    },
+    {
+     "n": "kidney beans, drained",
+     "a": 0.5,
+     "u": "cup",
+     "c": "Pantry"
+    },
+    {
+     "n": "crushed tomatoes",
+     "a": 0.75,
+     "u": "cup",
+     "c": "Pantry"
+    },
+    {
+     "n": "onion, diced",
+     "a": 0.25,
+     "u": "",
+     "c": "Produce"
+    },
+    {
+     "n": "chili powder",
+     "a": 1,
+     "u": "tsp",
+     "c": "Pantry"
+    },
+    {
+     "n": "chicken broth",
+     "a": 0.25,
+     "u": "cup",
+     "c": "Pantry"
+    }
+   ],
+   "steps": [
+    "Brown the turkey with the onion, 7 to 8 minutes.",
+    "Add the chili powder, beans, tomatoes and broth.",
+    "Simmer 25 minutes, stirring now and then. Salt to taste."
+   ]
+  },
+  {
+   "key": "sun",
+   "day": "Sunday",
+   "title": "Sheet Pan Chicken Sausage and Veggies",
+   "time": "30 min",
+   "cal": 440,
+   "ingredients": [
+    {
+     "n": "chicken sausage",
+     "a": 1,
+     "u": "link",
+     "c": "Meat"
+    },
+    {
+     "n": "baby potatoes, halved",
+     "a": 4,
+     "u": "",
+     "c": "Produce"
+    },
+    {
+     "n": "bell pepper, chunked",
+     "a": 0.5,
+     "u": "",
+     "c": "Produce"
+    },
+    {
+     "n": "zucchini, chunked",
+     "a": 0.5,
+     "u": "cup",
+     "c": "Produce"
+    },
+    {
+     "n": "olive oil",
+     "a": 1,
+     "u": "tsp",
+     "c": "Pantry"
+    }
+   ],
+   "steps": [
+    "Heat the oven to 425.",
+    "Toss the potatoes, pepper and zucchini with the oil and salt. Roast 15 minutes.",
+    "Add the sliced sausage to the pan and roast 12 minutes more."
+   ]
+  }
+ ]
+}
