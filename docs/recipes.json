@@ -361,24 +361,24 @@
    "section": "Meat and fish",
    "items": [
     {
-     "n": "Chicken breast, 2 small (about 1.5 lb)",
-     "p": 6.0
+     "n": "Perdue fresh boneless skinless chicken breast, 0.7 to 2.9 lb tray",
+     "p": 7.74
     },
     {
-     "n": "Lean ground turkey, 1 lb",
-     "p": 5.5
+     "n": "Marketside fresh ground turkey 93/7, 1 lb tray",
+     "p": 5.27
     },
     {
-     "n": "Salmon fillet, small pack",
-     "p": 6.0
+     "n": "Marketside Atlantic salmon fillets, skin-on, 0.7 to 1.25 lb",
+     "p": 8.3
     },
     {
-     "n": "Frozen shrimp, peeled, 12 oz bag",
-     "p": 8.0
+     "n": "Great Value frozen raw peeled shrimp, 12 oz bag",
+     "p": 6.76
     },
     {
-     "n": "Chicken sausage, 1 pack",
-     "p": 4.5
+     "n": "Al Fresco sweet apple chicken sausage, 11 oz, 4 count",
+     "p": 5.34
     }
    ]
   },
@@ -386,52 +386,52 @@
    "section": "Produce",
    "items": [
     {
-     "n": "Broccoli, 1 crown",
-     "p": 2.0
+     "n": "Broccoli crown, 1 each (priced by weight)",
+     "p": 1.83
     },
     {
-     "n": "Romaine hearts",
-     "p": 2.5
+     "n": "Romaine lettuce hearts, 3 count",
+     "p": 3.63
     },
     {
-     "n": "Green beans, 1 bag",
-     "p": 2.0
+     "n": "Marketside fresh green beans, 12 oz",
+     "p": 2.58
     },
     {
-     "n": "Sweet potato, 1",
-     "p": 1.0
+     "n": "Sweet potato, 1 each",
+     "p": 0.95
     },
     {
-     "n": "Baby potatoes, 1.5 lb bag",
-     "p": 3.0
+     "n": "Petite potatoes, 1.5 lb bag",
+     "p": 4.12
     },
     {
-     "n": "Stir fry vegetable mix, 1 bag",
-     "p": 2.5
+     "n": "Great Value stir fry vegetables, 20 oz bag (frozen)",
+     "p": 2.84
     },
     {
-     "n": "Bell pepper, 1",
-     "p": 1.0
+     "n": "Bell pepper, 1 each",
+     "p": 1.38
     },
     {
-     "n": "Zucchini, 1",
-     "p": 1.0
+     "n": "Zucchini, 1 each",
+     "p": 0.76
     },
     {
-     "n": "Tomato, 1",
-     "p": 0.8
+     "n": "Tomatoes on the vine, bag",
+     "p": 2.97
     },
     {
-     "n": "Onion, 1",
-     "p": 0.8
+     "n": "Yellow onion, 1 each",
+     "p": 0.81
     },
     {
-     "n": "Lemon, 1",
-     "p": 0.6
+     "n": "Lemon, 1 each",
+     "p": 0.68
     },
     {
-     "n": "Garlic, 1 head",
-     "p": 0.8
+     "n": "Garlic bulb, 1 each",
+     "p": 0.72
     }
    ]
   },
@@ -439,56 +439,56 @@
    "section": "Pantry (lasts many weeks)",
    "items": [
     {
-     "n": "Rice, 1 lb bag",
-     "p": 1.5
+     "n": "Great Value long grain rice, 16 oz",
+     "p": 0.96
     },
     {
-     "n": "Quinoa, small bag",
-     "p": 3.5
+     "n": "Great Value organic white quinoa, 16 oz",
+     "p": 3.44
     },
     {
-     "n": "Black beans, 1 can",
+     "n": "Great Value black beans, 15 oz can",
+     "p": 0.92
+    },
+    {
+     "n": "Great Value dark red kidney beans, 15.5 oz can",
+     "p": 0.92
+    },
+    {
+     "n": "Hunt's crushed tomatoes, 28 oz can",
+     "p": 2.27
+    },
+    {
+     "n": "Great Value reduced sodium chicken broth, 32 oz carton",
+     "p": 1.54
+    },
+    {
+     "n": "Great Value thick and chunky salsa, 16 oz jar",
+     "p": 1.97
+    },
+    {
+     "n": "Great Value taco seasoning mix, 1 oz packet",
+     "p": 0.5
+    },
+    {
+     "n": "Great Value chili powder, 3 oz",
      "p": 1.0
     },
     {
-     "n": "Kidney beans, 1 can",
+     "n": "Great Value paprika, 2.5 oz",
      "p": 1.0
     },
     {
-     "n": "Crushed tomatoes, 1 can",
-     "p": 1.5
+     "n": "Great Value less sodium soy sauce, 15 fl oz",
+     "p": 1.73
     },
     {
-     "n": "Chicken broth, 1 carton",
-     "p": 1.8
+     "n": "Imperial Dragon sesame oil, 5 fl oz",
+     "p": 3.32
     },
     {
-     "n": "Salsa, 1 jar",
-     "p": 2.5
-    },
-    {
-     "n": "Taco seasoning, 1 packet",
-     "p": 1.0
-    },
-    {
-     "n": "Chili powder",
-     "p": 2.0
-    },
-    {
-     "n": "Paprika",
-     "p": 2.0
-    },
-    {
-     "n": "Low sodium soy sauce",
-     "p": 2.5
-    },
-    {
-     "n": "Sesame oil",
-     "p": 3.5
-    },
-    {
-     "n": "Olive oil",
-     "p": 5.5
+     "n": "Great Value extra virgin olive oil, 17 fl oz",
+     "p": 6.12
     }
    ]
   },
@@ -496,8 +496,8 @@
    "section": "Dairy",
    "items": [
     {
-     "n": "Plain Greek yogurt, 1 small tub",
-     "p": 1.5
+     "n": "Great Value plain nonfat Greek yogurt, 32 oz tub",
+     "p": 3.28
     }
    ]
   }
