@@ -48,7 +48,7 @@ a.link{color:#2F5BFF}
   <section><h2>Ingredients</h2><div id="ings"></div></section>
   <section><h2>Steps</h2><ol id="steps"></ol></section>
   <section><h2>Grocery list for the week</h2><div class="meta" id="store" style="color:#5C5648;margin:-4px 0 10px"></div><div id="groc"></div></section>
-  <section><h2>Shopping trip at Walmart</h2><div class="meta" style="color:#5C5648;margin:-4px 0 10px">Rough prices. Check the shelf, they can be a little off.</div><div id="shop"></div></section>
+  <section><h2>Shopping trip at Walmart</h2><div class="meta" style="color:#5C5648;margin:-4px 0 10px">Rough prices for the servings picked above. Fresh items scale with servings, pantry items stay the same. Check the shelf, they can be a little off.</div><div id="shop"></div></section>
   <div class="note">The amounts change with the servings number. Tap an ingredient to check it off.</div>
 </div>
 <script>
@@ -62,6 +62,21 @@ a.link{color:#2F5BFF}
   function store(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
   var checked=load("checked",{});
   function day(){return data.days.filter(function(d){return d.key===cur;})[0];}
+  function renderShop(){
+    if(!data.shop)return;
+    var tot=0,pan=0,h="";
+    data.shop.forEach(function(sec){
+      var pantry=sec.section.indexOf("Pantry")===0;
+      h+='<div class="cat">'+sec.section+'</div>';
+      sec.items.forEach(function(i){
+        var mult=pantry?1:n,price=i.p*mult;tot+=price;if(pantry)pan+=price;
+        h+='<div class="row" style="cursor:default"><span class="t" style="flex:1">'+(mult>1?mult+" x ":"")+i.n+'</span><b>$'+price.toFixed(2)+'</b></div>';
+      });
+    });
+    h+='<div class="row" style="cursor:default;background:#14213D;color:#fff;margin-top:10px"><span class="t" style="flex:1">About total, first trip</span><b>$'+Math.round(tot)+'</b></div>';
+    h+='<div class="row" style="cursor:default"><span class="t" style="flex:1">About total after that (pantry already stocked)</span><b>$'+Math.round(tot-pan)+'</b></div>';
+    q("shop").innerHTML=h;
+  }
   function render(){
     var d=day();
     q("eye").textContent=d.day+" dinner";
@@ -89,6 +104,7 @@ a.link{color:#2F5BFF}
       });
     });
     q("groc").innerHTML=h;
+    renderShop();
   }
   document.addEventListener("click",function(e){
     var t=e.target.closest("button");if(!t)return;
@@ -100,13 +116,7 @@ a.link{color:#2F5BFF}
   });
   fetch("recipes.json").then(function(r){return r.json();}).then(function(j){
     data=j;
-    if(j.shop){var tot=0,pan=0,h="";
-      j.shop.forEach(function(sec){h+='<div class="cat">'+sec.section+'</div>';
-        sec.items.forEach(function(i){tot+=i.p;if(sec.section.indexOf("Pantry")===0)pan+=i.p;
-          h+='<div class="row" style="cursor:default"><span class="t" style="flex:1">'+i.n+'</span><b>$'+i.p.toFixed(2)+'</b></div>';});});
-      h+='<div class="row" style="cursor:default;background:#14213D;color:#fff;margin-top:10px"><span class="t" style="flex:1">About total, first trip</span><b>$'+Math.round(tot)+'</b></div>';
-      h+='<div class="row" style="cursor:default"><span class="t" style="flex:1">About total after that (pantry already stocked)</span><b>$'+Math.round(tot-pan)+'</b></div>';
-      q("shop").innerHTML=h;}
+
     if(j.store){q("store").textContent="Shop at "+j.store;}
     var p=new URLSearchParams(location.search).get("d");
     cur=KEYS.indexOf(p)>=0?p:KEYS[new Date().getDay()];
