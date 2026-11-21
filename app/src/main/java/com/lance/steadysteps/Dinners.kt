@@ -19,5 +19,5 @@ object Dinners {
         (cal.get(java.util.Calendar.DAY_OF_WEEK) + 5) % 7
 
     fun message(i: Int): String =
-        "Good morning! Dinner tonight is " + titles[i] + ". Ingredients and steps: " + BASE + "?d=" + keys[i]
+        "Good morning! Dinner tonight is " + titles[i] + ". Ingredients and steps: " + BASE + "?d=" + keys[i] + " All the dinners this week: " + BASE + "week.html"
 }
