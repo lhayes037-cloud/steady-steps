@@ -355,5 +355,151 @@
    ]
   }
  ],
- "store": "Walmart"
+ "store": "Walmart",
+ "shop": [
+  {
+   "section": "Meat and fish",
+   "items": [
+    {
+     "n": "Chicken breast, 2 small (about 1.5 lb)",
+     "p": 6.0
+    },
+    {
+     "n": "Lean ground turkey, 1 lb",
+     "p": 5.5
+    },
+    {
+     "n": "Salmon fillet, small pack",
+     "p": 6.0
+    },
+    {
+     "n": "Frozen shrimp, peeled, 12 oz bag",
+     "p": 8.0
+    },
+    {
+     "n": "Chicken sausage, 1 pack",
+     "p": 4.5
+    }
+   ]
+  },
+  {
+   "section": "Produce",
+   "items": [
+    {
+     "n": "Broccoli, 1 crown",
+     "p": 2.0
+    },
+    {
+     "n": "Romaine hearts",
+     "p": 2.5
+    },
+    {
+     "n": "Green beans, 1 bag",
+     "p": 2.0
+    },
+    {
+     "n": "Sweet potato, 1",
+     "p": 1.0
+    },
+    {
+     "n": "Baby potatoes, 1.5 lb bag",
+     "p": 3.0
+    },
+    {
+     "n": "Stir fry vegetable mix, 1 bag",
+     "p": 2.5
+    },
+    {
+     "n": "Bell pepper, 1",
+     "p": 1.0
+    },
+    {
+     "n": "Zucchini, 1",
+     "p": 1.0
+    },
+    {
+     "n": "Tomato, 1",
+     "p": 0.8
+    },
+    {
+     "n": "Onion, 1",
+     "p": 0.8
+    },
+    {
+     "n": "Lemon, 1",
+     "p": 0.6
+    },
+    {
+     "n": "Garlic, 1 head",
+     "p": 0.8
+    }
+   ]
+  },
+  {
+   "section": "Pantry (lasts many weeks)",
+   "items": [
+    {
+     "n": "Rice, 1 lb bag",
+     "p": 1.5
+    },
+    {
+     "n": "Quinoa, small bag",
+     "p": 3.5
+    },
+    {
+     "n": "Black beans, 1 can",
+     "p": 1.0
+    },
+    {
+     "n": "Kidney beans, 1 can",
+     "p": 1.0
+    },
+    {
+     "n": "Crushed tomatoes, 1 can",
+     "p": 1.5
+    },
+    {
+     "n": "Chicken broth, 1 carton",
+     "p": 1.8
+    },
+    {
+     "n": "Salsa, 1 jar",
+     "p": 2.5
+    },
+    {
+     "n": "Taco seasoning, 1 packet",
+     "p": 1.0
+    },
+    {
+     "n": "Chili powder",
+     "p": 2.0
+    },
+    {
+     "n": "Paprika",
+     "p": 2.0
+    },
+    {
+     "n": "Low sodium soy sauce",
+     "p": 2.5
+    },
+    {
+     "n": "Sesame oil",
+     "p": 3.5
+    },
+    {
+     "n": "Olive oil",
+     "p": 5.5
+    }
+   ]
+  },
+  {
+   "section": "Dairy",
+   "items": [
+    {
+     "n": "Plain Greek yogurt, 1 small tub",
+     "p": 1.5
+    }
+   ]
+  }
+ ]
 }
